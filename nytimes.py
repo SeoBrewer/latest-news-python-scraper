@@ -6,23 +6,24 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 
-# Configura el navegador Selenium
+
+# Configure the Selenium browser
 driver = webdriver.Chrome()
 url = "https://www.nytimes.com/"
 driver.get(url)
 
-# Espera a que aparezcan los elementos que necesitas
+# Wait for the elements you need to appear
 wait = WebDriverWait(driver, 10)
 articles_loaded = wait.until(EC.presence_of_all_elements_located((By.TAG_NAME, "article")))
 
+# Get the updated content after JavaScript has loaded it
 
-# Obtiene el contenido actualizado después de que JavaScript lo haya cargado
 page_source = driver.page_source
 
-# Cierra el navegador
+# Close the browser
 driver.quit()
 
-# Analiza el contenido con BeautifulSoup
+# Analyze the HTML source code with BeautifulSoup
 soup = BeautifulSoup(page_source, "html.parser")
 
 articles = soup.find_all("article", class_="css-uuu4k4")

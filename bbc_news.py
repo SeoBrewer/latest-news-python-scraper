@@ -12,18 +12,19 @@ def scrape_bbc_news():
     articles = soup.find_all("div", {"class": "gs-c-promo-body"})
     print(f"Found {len(articles)} articles on BBC News")
 
-    # Crear un conjunto de enlaces ya guardados
+
+    
     saved_links = set()
 
     try:
         with open("bbc_news.csv", "r", newline="") as csvfile:
             reader = csv.reader(csvfile)
-            next(reader)  # Salta la primera fila (encabezado)
+            next(reader)
             for row in reader:
                 _, _, link = row
                 saved_links.add(link)
     except FileNotFoundError:
-        pass  # El archivo no existe, lo crearemos más tarde
+        pass 
 
     new_articles_count = 0
 
